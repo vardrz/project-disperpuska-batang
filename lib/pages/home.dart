@@ -64,9 +64,9 @@ class HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width,
               color: const Color(0xffD9D9D9),
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: const Column(
+              child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: Text(
                       "MENU UTAMA",
@@ -77,13 +77,18 @@ class HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        children: [
-                          Image(
-                            image: AssetImage("assets/home-icon-profile.png"),
-                          ),
-                          Text('Profile')
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/profile");
+                        },
+                        child: const Column(
+                          children: [
+                            Image(
+                              image: AssetImage("assets/home-icon-profile.png"),
+                            ),
+                            Text('Profile')
+                          ],
+                        ),
                       ),
                       Column(
                         children: [

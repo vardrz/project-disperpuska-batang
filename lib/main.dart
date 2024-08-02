@@ -4,6 +4,7 @@ import 'package:project_kearsipan/pages/about.dart';
 import 'package:project_kearsipan/pages/contact.dart';
 import 'package:project_kearsipan/pages/home.dart';
 import 'package:project_kearsipan/pages/landing.dart';
+import 'package:project_kearsipan/pages/profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomePage(),
         '/contact': (context) => ContactPage(),
         '/about': (context) => AboutPage(),
+        '/profile': (context) => ProfilePage(),
       },
     );
   }
