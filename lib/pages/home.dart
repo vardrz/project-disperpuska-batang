@@ -90,21 +90,31 @@ class HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      Column(
-                        children: [
-                          Image(
-                            image: AssetImage("assets/home-icon-archive.png"),
-                          ),
-                          Text('Riwayat')
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/history");
+                        },
+                        child: const Column(
+                          children: [
+                            Image(
+                              image: AssetImage("assets/home-icon-archive.png"),
+                            ),
+                            Text('Riwayat')
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Image(
-                            image: AssetImage("assets/home-icon-borrow.png"),
-                          ),
-                          Text('Pinjam')
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/borrow");
+                        },
+                        child: const Column(
+                          children: [
+                            Image(
+                              image: AssetImage("assets/home-icon-borrow.png"),
+                            ),
+                            Text('Pinjam')
+                          ],
+                        ),
                       )
                     ],
                   )
