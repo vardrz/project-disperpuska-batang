@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_kearsipan/pages/about.dart';
+import 'package:project_kearsipan/pages/contact.dart';
 import 'package:project_kearsipan/pages/home.dart';
 import 'package:project_kearsipan/pages/landing.dart';
 
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LandingPage(),
         '/home': (context) => HomePage(),
+        '/contact': (context) => ContactPage(),
+        '/about': (context) => AboutPage(),
       },
     );
   }
