@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:project_kearsipan/pages/detail.dart';
 
 class BorrowPage extends StatefulWidget {
   const BorrowPage({super.key});
@@ -96,6 +97,17 @@ class BorrowPageState extends State<BorrowPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                      archive.archiveNumber,
+                                      "2002-01-02",
+                                      archive.archiveName,
+                                      archive.desc),
+                                ),
+                              );
+                            },
                             child: Container(
                               margin: EdgeInsets.only(top: 10, right: 5),
                               color: Colors.green.shade300,

@@ -6,7 +6,9 @@ import 'package:project_kearsipan/pages/contact.dart';
 import 'package:project_kearsipan/pages/history.dart';
 import 'package:project_kearsipan/pages/home.dart';
 import 'package:project_kearsipan/pages/landing.dart';
+import 'package:project_kearsipan/pages/login.dart';
 import 'package:project_kearsipan/pages/profile.dart';
+import 'package:project_kearsipan/pages/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => ProfilePage(),
         '/history': (context) => HistoryPage(),
         '/borrow': (context) => BorrowPage(),
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
       },
     );
   }
