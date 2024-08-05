@@ -11,35 +11,45 @@ class BorrowPage extends StatefulWidget {
 }
 
 class Archive {
-  final String archiveNumber;
-  final String desc;
-  final String archiveName;
   final String id;
+  final String onDate;
+  final String archiveNumber;
+  final String institute;
+  final String isi;
+  final String status;
+  final String keterangan;
 
   Archive({
-    required this.archiveNumber,
-    required this.desc,
-    required this.archiveName,
     required this.id,
+    required this.onDate,
+    required this.archiveNumber,
+    required this.institute,
+    required this.isi,
+    required this.status,
+    required this.keterangan,
   });
 
   factory Archive.fromJson(Map<String, dynamic> json) {
     return Archive(
-      archiveNumber: json['archive_number'],
-      desc: json['desc'],
-      archiveName: json['archive_name'],
       id: json['id'],
+      onDate: json['on_date'],
+      archiveNumber: json['archives_number'],
+      institute: json['institute'],
+      isi: json['isi'],
+      status: json['status'],
+      keterangan: json['keterangan'],
     );
   }
 }
 
 Future<List<Archive>> fetchArchives() async {
-  final response = await http.get(
-      Uri.parse('https://66acbcfef009b9d5c7333c16.mockapi.io/api/archive'));
+  final response =
+      await http.get(Uri.parse('https://disperpuska.69dev.id/api/list-arsip'));
 
   if (response.statusCode == 200) {
-    List<dynamic> json = jsonDecode(response.body);
-    return json.map((data) => Archive.fromJson(data)).toList();
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> jsonList = data['data'];
+    return jsonList.map((data) => Archive.fromJson(data)).toList();
   } else {
     throw Exception('Failed to load archives');
   }
@@ -91,8 +101,9 @@ class BorrowPageState extends State<BorrowPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(archive.desc),
-                      Text("Nama Berkas : " + archive.archiveName),
+                      Text(archive.archiveNumber),
+                      Text(archive.institute),
+                      Text(archive.isi),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -101,10 +112,14 @@ class BorrowPageState extends State<BorrowPage> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => DetailPage(
-                                      archive.archiveNumber,
-                                      "2002-01-02",
-                                      archive.archiveName,
-                                      archive.desc),
+                                    archive.id,
+                                    archive.archiveNumber,
+                                    archive.onDate,
+                                    archive.institute,
+                                    archive.isi,
+                                    false,
+                                    '',
+                                  ),
                                 ),
                               );
                             },

@@ -3,42 +3,58 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+  final String public_id;
+
+  const HistoryPage(this.public_id);
 
   @override
   State<HistoryPage> createState() => HistoryPageState();
 }
 
 class Archive {
-  final String archiveNumber;
-  final String desc;
-  final String archiveName;
   final String id;
+  final String onDate;
+  final String archiveNumber;
+  final String institute;
+  final String desc;
+  final String status;
+  final String keterangan;
 
   Archive({
-    required this.archiveNumber,
-    required this.desc,
-    required this.archiveName,
     required this.id,
+    required this.onDate,
+    required this.archiveNumber,
+    required this.institute,
+    required this.desc,
+    required this.status,
+    required this.keterangan,
   });
 
   factory Archive.fromJson(Map<String, dynamic> json) {
     return Archive(
-      archiveNumber: json['archive_number'],
-      desc: json['desc'],
-      archiveName: json['archive_name'],
       id: json['id'],
+      onDate: json['on_date'],
+      archiveNumber: json['archives_number'],
+      institute: json['institute'],
+      desc: json['isi'],
+      status: json['status'],
+      keterangan: json['keterangan'],
     );
   }
 }
 
-Future<List<Archive>> fetchArchives() async {
+Future<List<Archive>> fetchArchives(String publicId) async {
+  print('https://disperpuska.69dev.id/api/list-arsip/$publicId');
+
   final response = await http.get(
-      Uri.parse('https://66acbcfef009b9d5c7333c16.mockapi.io/api/archive'));
+    Uri.parse('https://disperpuska.69dev.id/api/list-arsip/$publicId'),
+  );
 
   if (response.statusCode == 200) {
-    List<dynamic> json = jsonDecode(response.body);
-    return json.map((data) => Archive.fromJson(data)).toList();
+    final Map<String, dynamic> responseData = jsonDecode(response.body);
+    final List<dynamic> archivesJson = responseData['data'];
+
+    return archivesJson.map((json) => Archive.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load archives');
   }
@@ -50,7 +66,18 @@ class HistoryPageState extends State<HistoryPage> {
   @override
   void initState() {
     super.initState();
-    futureArchives = fetchArchives();
+    futureArchives = fetchArchives(widget.public_id);
+  }
+
+  Color _getStatusColor(String status) {
+    switch (status) {
+      case 'Dipinjam':
+        return Colors.green.shade800; // Warna hijau untuk status Dipinjam
+      case 'Diproses':
+        return Colors.orange.shade700; // Warna kuning untuk status Diproses
+      default:
+        return Colors.black; // Warna default
+    }
   }
 
   @override
@@ -90,17 +117,20 @@ class HistoryPageState extends State<HistoryPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("No. Definitif : " + archive.archiveNumber),
-                      Text(archive.desc),
-                      Text("Nama Berkas : " + archive.archiveName),
+                      Text("Nomor Arsip: " + archive.archiveNumber),
+                      Text("Tanggal: " + archive.onDate),
+                      Text("Instansi: " + archive.institute),
+                      Text("Isi Arsip: " + archive.desc),
+                      Text(
+                        "Status: " + archive.keterangan,
+                        style: TextStyle(
+                          color: _getStatusColor(archive.keterangan),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 );
-                // ListTile(
-                //   title: Text(archive.archiveName),
-                //   subtitle: Text(archive.desc),
-                //   trailing: Text(archive.archiveNumber),
-                // );
               },
             );
           }

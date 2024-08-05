@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:project_kearsipan/pages/login.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -92,7 +93,18 @@ class HomePageState extends State<HomePage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, "/history");
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                'history',
+                              ),
+                            ),
+                          );
                         },
                         child: const Column(
                           children: [

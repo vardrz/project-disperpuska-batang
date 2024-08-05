@@ -3,10 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project_kearsipan/pages/about.dart';
 import 'package:project_kearsipan/pages/borrow.dart';
 import 'package:project_kearsipan/pages/contact.dart';
-import 'package:project_kearsipan/pages/history.dart';
 import 'package:project_kearsipan/pages/home.dart';
 import 'package:project_kearsipan/pages/landing.dart';
-import 'package:project_kearsipan/pages/login.dart';
 import 'package:project_kearsipan/pages/profile.dart';
 import 'package:project_kearsipan/pages/register.dart';
 
@@ -29,10 +27,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomePage(),
         '/contact': (context) => ContactPage(),
         '/about': (context) => AboutPage(),
-        '/profile': (context) => ProfilePage(),
-        '/history': (context) => HistoryPage(),
         '/borrow': (context) => BorrowPage(),
-        '/login': (context) => LoginPage(),
+        '/profile': (context) => ProfilePage(),
         '/register': (context) => RegisterPage(),
       },
     );
