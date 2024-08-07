@@ -22,7 +22,8 @@ class ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
           color: Color(0xffC0C0C0),
           alignment: Alignment.topRight,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -35,9 +36,12 @@ class ProfilePageState extends State<ProfilePage> {
               ),
               Image(
                 image: AssetImage("assets/org-chart.png"),
-              )
+              ),
+              SizedBox(height: 80)
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

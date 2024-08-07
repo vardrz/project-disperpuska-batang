@@ -49,97 +49,103 @@ class HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Container(
-        color: Color(0xffC0C0C0),
-        alignment: Alignment.center,
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: const Image(
-                image: AssetImage("assets/home-image1.png"),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Color(0xffC0C0C0),
+          alignment: Alignment.center,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                child: const Image(
+                  image: AssetImage("assets/home-image1.png"),
+                ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              color: const Color(0xffD9D9D9),
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      "MENU UTAMA",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                color: const Color(0xffD9D9D9),
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        "MENU UTAMA",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/profile");
-                        },
-                        child: const Column(
-                          children: [
-                            Image(
-                              image: AssetImage("assets/home-icon-profile.png"),
-                            ),
-                            Text('Profile')
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                'history',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/profile");
+                          },
+                          child: const Column(
+                            children: [
+                              Image(
+                                image:
+                                    AssetImage("assets/home-icon-profile.png"),
                               ),
-                            ),
-                          );
-                        },
-                        child: const Column(
-                          children: [
-                            Image(
-                              image: AssetImage("assets/home-icon-archive.png"),
-                            ),
-                            Text('Riwayat')
-                          ],
+                              Text('Profile')
+                            ],
+                          ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/borrow");
-                        },
-                        child: const Column(
-                          children: [
-                            Image(
-                              image: AssetImage("assets/home-icon-borrow.png"),
-                            ),
-                            Text('Pinjam')
-                          ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(
+                                  "",
+                                  "",
+                                  "",
+                                  "",
+                                  "",
+                                  'history',
+                                ),
+                              ),
+                            );
+                          },
+                          child: const Column(
+                            children: [
+                              Image(
+                                image:
+                                    AssetImage("assets/home-icon-archive.png"),
+                              ),
+                              Text('Riwayat')
+                            ],
+                          ),
                         ),
-                      )
-                    ],
-                  )
-                ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/borrow");
+                          },
+                          child: const Column(
+                            children: [
+                              Image(
+                                image:
+                                    AssetImage("assets/home-icon-borrow.png"),
+                              ),
+                              Text('Pinjam')
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(10),
-              child: Image(
-                image: AssetImage("assets/home-image2.png"),
+              const Padding(
+                padding: EdgeInsets.all(10),
+                child: Image(
+                  image: AssetImage("assets/home-image2.png"),
+                ),
               ),
-            )
-          ],
+              SizedBox(height: 80)
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
