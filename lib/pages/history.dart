@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart'; // Tambahkan dependency intl pada pubspec.yaml
 
 class HistoryPage extends StatefulWidget {
   final String public_id;
@@ -19,6 +20,7 @@ class Archive {
   final String desc;
   final String status;
   final String keterangan;
+  final String updated_at;
 
   Archive({
     required this.id,
@@ -28,6 +30,7 @@ class Archive {
     required this.desc,
     required this.status,
     required this.keterangan,
+    required this.updated_at,
   });
 
   factory Archive.fromJson(Map<String, dynamic> json) {
@@ -39,6 +42,7 @@ class Archive {
       desc: json['isi'],
       status: json['status'],
       keterangan: json['keterangan'],
+      updated_at: json['updated_at'],
     );
   }
 }
@@ -80,6 +84,20 @@ class HistoryPageState extends State<HistoryPage> {
     }
   }
 
+  String? _calculateFine(String updatedAt) {
+    final DateFormat dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
+    final DateTime updateDate = dateFormat.parse(updatedAt);
+    final DateTime today = DateTime.now();
+    final Duration difference = today.difference(updateDate);
+    final int daysLate = difference.inDays;
+
+    if (daysLate > 7) {
+      final int fine = (daysLate - 7) * 2000; // Menghitung denda
+      return "Denda: \Rp ${fine}"; // Format denda
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,6 +128,8 @@ class HistoryPageState extends State<HistoryPage> {
               itemCount: archives.length,
               itemBuilder: (context, index) {
                 final archive = archives[index];
+                final fine = _calculateFine(archive.updated_at);
+
                 return Container(
                   color: Colors.black12,
                   margin: EdgeInsets.all(5),
@@ -121,6 +141,14 @@ class HistoryPageState extends State<HistoryPage> {
                       Text("Tanggal: " + archive.onDate),
                       Text("Instansi: " + archive.institute),
                       Text("Isi Arsip: " + archive.desc),
+                      if (fine != null)
+                        Text(
+                          fine,
+                          style: TextStyle(
+                            color: Colors.red, // Warna denda merah
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       Text(
                         "Status: " + archive.keterangan,
                         style: TextStyle(
